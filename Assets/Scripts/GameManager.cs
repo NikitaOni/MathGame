@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < expressionViews.Length; i++)
         {
-            if (!expressionViews[i].isReady)
+            if (!expressionViews[i].isReady && expressionViews[i].gameObject.activeSelf)
             {
                 Debug.Log("Ne vse");
                 return;
