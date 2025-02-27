@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviour
@@ -10,8 +11,12 @@ public class GameManager : MonoBehaviour
     public LevelDescription currentLevel;
     public ItemDescription questionSlot;
     public AnswerSlotView[] answerSlots;
-    public readonly List<ItemDescription> answersList = new();
+    public List<ItemDescription> answersList = new();
     public ItemDB database;
+    [SerializeField]private GameObject _finishPanel;
+
+    public StatsPlayer player;
+    public LevelDB levelDB;
 
     //public static ItemDescription SelectedAnswerSlot
     //{
@@ -37,14 +42,30 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         instance = this;
+        InitLevel();
 
         database.Init();
         InitExpressions();
         InitAnswers();
     }
 
+    public void InitLevel()
+    {
+        currentLevel = levelDB.innerData[player.levelPlayer - 1];  
+    }
+
+    public void UpdateLevel()
+    {
+        ResetAnswerSlot();
+        InitLevel();
+        InitExpressions();
+        InitAnswers();
+    }
+
     private void InitExpressions()
     {
+        answersList.Clear();
+
         for (int i = 0; i < expressionViews.Length; i++) 
         {
             var isValid = i < currentLevel.expressions.Length;
@@ -86,6 +107,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ResetAnswerSlot()
+    {
+        for (int i = 0; i < answerSlots.Length; i++)
+        {
+            answerSlots[i].SetVisible(true);
+            answerSlots[i].transform.localScale = Vector3.one;
+        }
+    }
+
     public void RemoveSelectionExpressions() 
     {
         for (int i = 0; i < expressionViews.Length; i++)
@@ -108,11 +138,21 @@ public class GameManager : MonoBehaviour
             }  
         }
         ShowWinScreen();
+
+        for (int i = 0; i < expressionViews.Length; i++)
+        {
+            expressionViews[i].ResetExpression();
+        }
     }
 
     public void ShowWinScreen()
     {
-        Debug.Log("VSE POBEDA!");
+        _finishPanel.SetActive(true);
+    }
+
+    public void HideWinScreen()
+    {
+        _finishPanel.SetActive(false);
     }
 
     public void AddSelectionExpressions()

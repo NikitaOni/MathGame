@@ -77,6 +77,11 @@ public class ExpressionView : MonoBehaviour
         }
     }
 
+    public void ResetExpression()
+    {
+        isReady = false;
+    }
+
     public void SetVisible(bool isVisible)
     {
         gameObject.SetActive(isVisible);

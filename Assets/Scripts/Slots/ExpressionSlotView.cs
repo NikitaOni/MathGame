@@ -72,7 +72,10 @@ public class ExpressionSlotView : ItemView, IPointerClickHandler
         UnLock();
         GameManager.instance.SetAnswerVisible(answerSlotIndex, true);
         transform.localScale = Vector3.one;
-        StartCoroutine(GameManager.instance.answerSlots[answerSlotIndex].Animation(0.5f, false));
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(GameManager.instance.answerSlots[answerSlotIndex].Animation(0.1f, false));
+        }   
     }
 }
 public class ExpressionSlotArgs 
