@@ -9,6 +9,7 @@ public class ExpressionView : MonoBehaviour
     public List<ExpressionSlotView> expressionSlots;
     private readonly List<int> _answerSlotIndexes = new(); 
     private Coroutine _coroutine;
+    public bool isReady = false;
 
     public void InitExpression(BaseExpression expression, in List<ItemDescription> answersList)
     {
@@ -33,9 +34,9 @@ public class ExpressionView : MonoBehaviour
     private IEnumerator StartAnimation(ExpressionSlotView inputSlot, AnswerSlotView answerSlot)
     {
         inputSlot.transform.localScale = Vector3.zero;
-        yield return StartCoroutine(answerSlot.Animation(0.5f, true));
+        yield return StartCoroutine(answerSlot.Animation(0.1f, true));
         GameManager.instance.SetAnswerVisible(answerSlot.index, false);
-        StartCoroutine(inputSlot.Animation(0.5f, false));
+        StartCoroutine(inputSlot.Animation(0.1f, false));
         _coroutine = null;
     }
 
@@ -67,9 +68,12 @@ public class ExpressionView : MonoBehaviour
             }
         }
         var result = _expression.CheckExpression(expressionSlots);
+        GameManager.instance.RemoveSelectionAnswers();
         if (result)
         {
+            isReady = true;
             DoTransition(arg);
+            GameManager.instance.CheckWin();
         }
     }
 

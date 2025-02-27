@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 public class ExpressionSlotView : ItemView, IPointerClickHandler
 {
     public ItemDescription currentItem;
     public int answerSlotIndex;
+    public Image backgroundImage;
 
     public bool islocked => _islocked;
     private bool _islocked;
@@ -22,6 +24,7 @@ public class ExpressionSlotView : ItemView, IPointerClickHandler
             return;
         }
         onPut(new ExpressionSlotArgs(GameManager.instance.selectedItem, this, GameManager.instance.SelectedAnswerSlot));
+        GameManager.instance.RemoveSelectionExpressions();
     }
 
     public bool CanSet(int slotIndex) 

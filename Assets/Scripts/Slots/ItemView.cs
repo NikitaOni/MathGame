@@ -24,6 +24,8 @@ public class ItemView : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        transform.localScale = targetScale;
     }
 
     public virtual void Attach(ItemDescription item)

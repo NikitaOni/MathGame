@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour
         database.Init();
         InitExpressions();
         InitAnswers();
-    } 
-    
+    }
+
     private void InitExpressions()
     {
         for (int i = 0; i < expressionViews.Length; i++) 
@@ -84,6 +84,57 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(answer.name);
         }
+    }
+
+    public void RemoveSelectionExpressions() 
+    {
+        for (int i = 0; i < expressionViews.Length; i++)
+        {
+            for (int j = 0; j < expressionViews[i].expressionSlots.Count; j++)
+            {            
+                expressionViews[i].expressionSlots[j].backgroundImage.color = new Color32(255, 255, 255, 255);
+            }
+        }
+    }
+
+    public void CheckWin()
+    {
+        for (int i = 0; i < expressionViews.Length; i++)
+        {
+            if (!expressionViews[i].isReady)
+            {
+                Debug.Log("Ne vse");
+                return;
+            }  
+        }
+        ShowWinScreen();
+    }
+
+    public void ShowWinScreen()
+    {
+        Debug.Log("VSE POBEDA!");
+    }
+
+    public void AddSelectionExpressions()
+    {
+        for (int i = 0; i < expressionViews.Length; i++)
+        {
+            for (int j = 0; j < expressionViews[i].expressionSlots.Count; j++)
+            {
+                if (expressionViews[i].expressionSlots[j].currentItem == database.items["question"])
+                {
+                    expressionViews[i].expressionSlots[j].backgroundImage.color = new Color32(177, 247, 147, 255);
+                }
+            }
+        }
+    }
+    public void RemoveSelectionAnswers()
+    {
+        for (int i = 0; i < answerSlots.Length; i++)
+        {
+            answerSlots[i].backgroundImage.color = new Color(255, 255, 255, 1);
+        }
+        RemoveSelectionExpressions();
     }
 
     private void Shuffle<ItemDescription>(List<ItemDescription> list)
