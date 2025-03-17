@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class FinishPanel : MonoBehaviour
 {
@@ -15,5 +15,18 @@ public class FinishPanel : MonoBehaviour
     {
         GameManager.instance.UpdateLevel();
         GameManager.instance.HideWinScreen();
+    }
+
+    public IEnumerator AppearanceAnimation(float duration)
+    {
+        transform.localScale = Vector3.zero;
+
+        var elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 }

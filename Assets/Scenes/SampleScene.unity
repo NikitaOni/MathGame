@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 36355015}
   - component: {fileID: 36355017}
   - component: {fileID: 36355016}
+  - component: {fileID: 36355018}
   m_Layer: 5
   m_Name: Light
   m_TagString: Untagged
@@ -310,6 +311,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36355014}
   m_CullTransparentMesh: 1
+--- !u!114 &36355018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36355014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de23cc2e96b1b4438a05b07911f3d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &65871654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,7 +1955,6 @@ GameObject:
   - component: {fileID: 686652548}
   - component: {fileID: 686652550}
   - component: {fileID: 686652549}
-  - component: {fileID: 686652551}
   m_Layer: 5
   m_Name: FinishPanel
   m_TagString: Untagged
@@ -2011,19 +2023,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686652547}
   m_CullTransparentMesh: 1
---- !u!114 &686652551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686652547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b027123f096b3e54fbbb77f0b665f807, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1060820585}
 --- !u!1 &709176178
 GameObject:
   m_ObjectHideFlags: 0
@@ -3416,7 +3415,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 686652551}
+      - m_Target: {fileID: 1339874624}
         m_TargetAssemblyTypeName: FinishPanel, Assembly-CSharp
         m_MethodName: RepeatLevel
         m_Mode: 1
@@ -3495,7 +3494,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 686652548}
   m_Father: {fileID: 1482210568}
@@ -4969,7 +4968,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 686652551}
+      - m_Target: {fileID: 1339874624}
         m_TargetAssemblyTypeName: FinishPanel, Assembly-CSharp
         m_MethodName: NextLevel
         m_Mode: 1

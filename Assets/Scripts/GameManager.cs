@@ -148,6 +148,8 @@ public class GameManager : MonoBehaviour
     public void ShowWinScreen()
     {
         _finishPanel.SetActive(true);
+        FinishPanel finishPanel = FindObjectOfType<FinishPanel>();
+        finishPanel.StartCoroutine(finishPanel.AppearanceAnimation(3f));
     }
 
     public void HideWinScreen()
